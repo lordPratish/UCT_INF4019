@@ -1,9 +1,15 @@
 #!/bin/bash
 
+#change to root user
+sudo su
+
+#update
+apt-get update
+
 #Terminator
 apt-get install terminator -y
 
-Update the package list and upgrade existing packages
+#Update the package list and upgrade existing packages
 sudo apt-get update
 
 #Download Google
@@ -11,8 +17,13 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 
 #Install Sublime Text
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add - echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list sudo apt-get update sudo apt-get install sublime-text -y
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt-get update
+sudo apt-get install sublime-text
 
+#go back
 cd /home/kali
 sudo apt-get install build-essential   -y            
 
@@ -30,6 +41,7 @@ chmod 755 setup.py
 #Install the distorm3 library
 python setup.py install
 
+cd /home/kali
 #Install required dependencies for Yara
 sudo apt-get install autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 
@@ -59,7 +71,7 @@ pip install openpyxl
 git clone https://github.com/volatilityfoundation/volatility3.git
 
 cd volatility3
-chmod 755 setup.py    (or type sudo chmod 755 setup.py)
+chmod 755 setup.py
 chmod 755 vol.py
 
 
@@ -87,3 +99,17 @@ python3 setup.py install
 
 # Clean up
 rm -rf volatility_3.0.0_beta.tar.gz volatility_3.0.0_beta
+
+
+cd /home/kali
+wget https://bootstrap.pypa.io/pip/get-pip.py
+sudo python3 get-pip.py  
+cd /home/kali
+pip3 install --upgrade setuptools
+sudo apt-get install python3-dev
+pip3 install pycryptodome   
+pip3 install distorm3    
+git clone https://github.com/volatilityfoundation/volatility3.git
+cd volatility3
+sudo python3 setup.py install  
+python3 vol.py -h  
