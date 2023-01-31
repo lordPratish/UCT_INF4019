@@ -64,3 +64,26 @@ chmod 755 vol.py
 
 
 
+#!/bin/bash
+
+# Check if curl command is installed
+if ! command -v curl &> /dev/null; then
+  echo "Error: curl command not found."
+  echo "Please install curl and try again."
+  exit 1
+fi
+
+# Download the latest version of Volatility 3
+curl -O https://github.com/volatilityfoundation/volatility3/releases/download/v3.0.0/volatility_3.0.0_beta.tar.gz
+
+# Extract the archive
+tar xvf volatility_3.0.0_beta.tar.gz
+
+# Change to the extracted directory
+cd volatility_3.0.0_beta
+
+# Install Volatility 3
+python3 setup.py install
+
+# Clean up
+rm -rf volatility_3.0.0_beta.tar.gz volatility_3.0.0_beta
